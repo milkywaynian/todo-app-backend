@@ -4,11 +4,13 @@ const serverless = require('serverless-http');
 const express = require('express');
 const app = express();
 
-app.get('/tasks', function(request, response) {
-  response.send('Hello World!');
-})
+app.get('/tasks', function(req, res) {
+  res.json({
+    message: 'Your API works',
+  });
+});
 
-module.exports.handler = serverless(app);
+module.exports.tasks = serverless(app);
 
 
 // module.exports.tasks = async event => {
