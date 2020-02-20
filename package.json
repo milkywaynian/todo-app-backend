@@ -19,7 +19,9 @@
   "homepage": "https://github.com/milkywaynian/todo-app-backend#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "mysql": "^2.18.1",
     "serverless-http": "^2.3.1",
-    "sql": "^0.78.0"
+    "sql": "^0.78.0",
+    "uuid": "^3.4.0"
   }
 }

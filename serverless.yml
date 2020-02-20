@@ -4,6 +4,12 @@ provider:
   name: aws
   runtime: nodejs12.x
   region: eu-west-2
+  environment:
+     db_host: ${file(./config.${self:provider.stage}.json):db_host}
+     db_user: ${file(./config.${self:provider.stage}.json):db_user}
+     db_password: ${file(./config.${self:provider.stage}.json):db_password}
+     db_database: ${file(./config.${self:provider.stage}.json):db_database}
+
 
 functions:
   tasks:
