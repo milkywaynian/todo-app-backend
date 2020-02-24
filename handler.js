@@ -80,7 +80,24 @@ app.put('/tasks/:taskID', function (req,res){
   });
 });
 
+app.delete ('/tasks/:taskID', function (req,res) {
 
+  //select a task by task id
+
+  const taskID = req.params.taskID;
+
+  //remove the task from database 
+
+  connection.query('DELETE FROM `tasks` WHERE taskID = ?;',taskID, function (error, results, fields) {
+    if(error) {
+      console.error('Your query had a problem with deleting a task', error);
+      res.status(500);
+      res.json({errorMessage: error});
+    } else { 
+      res.json({tasks:results}); 
+    }
+  });
+});
 
 
 
