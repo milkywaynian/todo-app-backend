@@ -81,9 +81,6 @@ app.put('/tasks/:taskID', function (req,res){
 });
 
 
-app.get('/women/outlet/:typeOfStore')
-
-
 
 
 
