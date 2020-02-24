@@ -3,6 +3,7 @@
 const serverless = require('serverless-http');
 const express = require('express');
 const app = express();
+app.use(express.json());
 const uuidv4 = require('uuid/v4');
 const mysql = require('mysql');
 
@@ -38,6 +39,32 @@ app.get('/tasks', function(req, res) {
   });
 });
 
+
+
+app.post('/tasks', function (req,res) {
+  // generate a UD 
+  const taskID = uuidv4();
+  // add UD to body 
+  // sen
+  const itemToPost = req.body;
+  itemToPost.taskID = taskID;
+  itemToPost.completed = false;
+
+  console.log('Attempting to insert: ' + JSON.stringify(itemToPost));
+
+  connection.query('INSERT INTO `tasks` SET ?', itemToPost, function (error, results, fields) {
+    if(error) {
+      console.error('Your query had a problem with inserting a new tasks', error);
+      res.status(500);
+      res.json({errorMessage: error});
+    } else { 
+      res.json({tasks:results}); 
+    }
+  });
+});
+
+
+
 module.exports.tasks = serverless(app);
 
 
@@ -56,3 +83,6 @@ module.exports.tasks = serverless(app);
   // Use this code if you don't use the http event with the LAMBDA-PROXY integration
   // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
 
+
+
+  
