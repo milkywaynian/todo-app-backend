@@ -54,7 +54,7 @@ app.post('/tasks', function (req,res) {
 
   connection.query('INSERT INTO `tasks` SET ?', itemToPost, function (error, results, fields) {
     if(error) {
-      console.error('Your query had a problem with inserting a new tasks', error);
+      console.error('Your query had a problem with inserting a new task', error);
       res.status(500);
       res.json({errorMessage: error});
     } else { 
@@ -62,6 +62,28 @@ app.post('/tasks', function (req,res) {
     }
   });
 });
+
+
+app.put('/tasks/:taskID', function (req,res){
+  
+  const taskID = req.params.taskID;
+  
+  connection.query('UPDATE `tasks` SET completed = true  WHERE taskID = ?;', taskID, function (error, results, fields) {
+    if(error) {
+      console.error('Your query had a problem with editing a task', error);
+      res.status(500);
+      res.json({errorMessage: error});
+    } else { 
+      res.json({tasks:results}); 
+    }
+
+  });
+});
+
+
+app.get('/women/outlet/:typeOfStore')
+
+
 
 
 
