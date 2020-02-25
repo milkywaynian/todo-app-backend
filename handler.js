@@ -19,7 +19,7 @@ const connection = mysql.createConnection({
 
 app.get('/tasks', function(req, res) {
 
-  connection.query('SELECT * FROM `tasks` WHERE `userID` = "geoff"', function (error, results, fields) {
+  connection.query('SELECT * FROM `tasks` WHERE `userID` = 1', function (error, results, fields) {
     // error will be an Error if one occurred during the query
     if(error) {
       console.error('Your query had a problem with fetching tasks', error);
@@ -31,11 +31,6 @@ app.get('/tasks', function(req, res) {
     }
     // results will contain the results of the query
     // fields will contain information about the returned results fields (if any)
-  });
-
-
-  res.json({
-    message: 'Your API works',
   });
 });
 
@@ -49,8 +44,6 @@ app.post('/tasks', function (req,res) {
   const itemToPost = req.body;
   itemToPost.taskID = taskID;
   itemToPost.completed = false;
-
-  console.log('Attempting to insert: ' + JSON.stringify(itemToPost));
 
   connection.query('INSERT INTO `tasks` SET ?', itemToPost, function (error, results, fields) {
     if(error) {
