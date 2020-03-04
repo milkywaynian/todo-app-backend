@@ -53,7 +53,7 @@ app.post('/tasks', function (req,res) {
       res.status(500);
       res.json({errorMessage: error});
     } else { 
-      res.json({tasks:results}); 
+      res.json(itemToPost); 
     }
   });
 });
